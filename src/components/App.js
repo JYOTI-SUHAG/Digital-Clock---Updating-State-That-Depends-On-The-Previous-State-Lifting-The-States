@@ -1,43 +1,43 @@
-import React, {Component, useState} from "react";
+import React, { useEffect } from 'react'
+
 import '../styles/App.css';
 
-class App extends Component {
+const App = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            date : new Date()
-        }
+ const [date,setDate] = React.useState()
 
-        this.tick = this.tick.bind(this);
-    }
+ useEffect(()=>{
 
-    componentDidMount() {
-        this.timerID = setInterval(this.tick, 1000)
-    }
+   setDate(new Date().toLocaleString())
 
-    componentWillUnmount() {
-        clearInterval(this.timerID);
-    }
+   const timerId = setInterval(()=>{
 
-    tick() {
-        // console.log("state is not updated")
-        this.setState({
-            date: new Date()
-        }, 
-        // () => console.log("state is updated")
-        )
-    }
-    
-    render() {
+     setDate(new Date().toLocaleString())
 
-        return(
-            <div className="Clock">
-               <h3 id="time">{this.state.date.toLocaleTimeString()}</h3>
-            </div>
-        )
-    }
+   },1000)
+
+   return () => clearInterval(timerId)
+
+ },[])
+
+ return (
+
+   <div id="main">
+
+     <div className="date">{date}</div>
+
+   </div>
+
+ )
+
 }
 
+ 
+
+ 
 
 export default App;
+
+ 
+
+use setInterval
